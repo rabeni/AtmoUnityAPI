@@ -25,8 +25,6 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityOSC;
-using DisruptorUnity3d;
-
 
 /// <summary>
 /// Models a log of a server composed by an OSCServer, a List of OSCPacket and a List of
@@ -88,9 +86,6 @@ public class OSCHandler : MonoBehaviour
 	private string ipAddress = "";
 
 	private const int _loglength = 25;
-
-    //NOTICE - extention to UnityOSC
-    private RingBuffer<OSCPacket> _inputBuffer = new RingBuffer<OSCPacket>(15);
    	#endregion
 	
 	/// <summary>
@@ -104,9 +99,6 @@ public class OSCHandler : MonoBehaviour
         //Initialize OSC clients (transmitters)
         //Example:		
 		//CreateClient("TouchOSC Bridge", IPAddress.Parse("192.168.2.3"), 9000);
-
-        //Initialize OSC servers (listeners)
-		CreateServer ("AtmoTracking", 7771);
 	}
 	
 	#region Properties
@@ -125,15 +117,6 @@ public class OSCHandler : MonoBehaviour
 			return _servers;
 		}
 	}
-
-    //NOTICE - Extention to UnityOSC
-    public RingBuffer<OSCPacket> InputBuffer
-    {
-        get
-        {
-            return _inputBuffer;
-        }
-    }
 	#endregion
 	
 	#region Methods
@@ -191,7 +174,6 @@ public class OSCHandler : MonoBehaviour
 	public void CreateServer(string serverId, int port)
 	{
         OSCServer server = new OSCServer(port);
-        server.PacketReceivedEvent += OnPacketReceived;
 
         ServerLog serveritem = new ServerLog();
         serveritem.server = server;
@@ -200,18 +182,6 @@ public class OSCHandler : MonoBehaviour
 		
 		_servers.Add(serverId, serveritem);
 	}
-
-
-    //NOTICE - extention to UnityOSC
-    //Puts incoming packets into a buffer that is read by OSCController
-    void OnPacketReceived(OSCServer server, OSCPacket packet)
-    {
-        if (packet.Address == "/tracking") {
-
-            _inputBuffer.Enqueue(packet);
-
-        }
-    }
 	
 	/// <summary>
 	/// Sends an OSC message to a specified client, given its clientId (defined at the OSC client construction),
