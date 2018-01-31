@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 187845673}
   - component: {fileID: 187845672}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: DiceFace3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 445156133}
   - component: {fileID: 445156132}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: DiceFace5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 662906155}
   - component: {fileID: 662906154}
   m_Layer: 5
-  m_Name: Image (11)
+  m_Name: Color6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1064,7 +1064,7 @@ GameObject:
   - component: {fileID: 784150211}
   - component: {fileID: 784150210}
   m_Layer: 5
-  m_Name: Image (10)
+  m_Name: Color5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1179,7 +1179,7 @@ GameObject:
   - component: {fileID: 851650079}
   - component: {fileID: 851650078}
   m_Layer: 5
-  m_Name: Image (7)
+  m_Name: Color2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1976,7 +1976,7 @@ GameObject:
   - component: {fileID: 1383725909}
   - component: {fileID: 1383725908}
   m_Layer: 5
-  m_Name: Image (5)
+  m_Name: DiceFace6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2044,7 +2044,7 @@ GameObject:
   - component: {fileID: 1391781435}
   - component: {fileID: 1391781434}
   m_Layer: 5
-  m_Name: Image (8)
+  m_Name: Color3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2752,7 +2752,7 @@ GameObject:
   - component: {fileID: 1728328323}
   - component: {fileID: 1728328322}
   m_Layer: 5
-  m_Name: Image (9)
+  m_Name: Color4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3092,7 +3092,7 @@ GameObject:
   - component: {fileID: 1847977043}
   - component: {fileID: 1847977042}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: DiceFace4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3444,7 +3444,7 @@ GameObject:
   - component: {fileID: 1968162221}
   - component: {fileID: 1968162220}
   m_Layer: 5
-  m_Name: Image (6)
+  m_Name: Color1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
