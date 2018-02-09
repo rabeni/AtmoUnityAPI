@@ -23,6 +23,7 @@ public class ExampleEffects : MonoBehaviour {
     {
         if (!randomOn && on)
         {
+            SaveColors();
             randomOn = true;
             StartCoroutine(RandomEffect());
         }
@@ -44,6 +45,7 @@ public class ExampleEffects : MonoBehaviour {
 
             yield return new WaitForSeconds(0.1f);
         }
+        LoadColors();
     }
 
     public void StripOn()
@@ -51,10 +53,7 @@ public class ExampleEffects : MonoBehaviour {
         if (!on)
         {
             on = true;
-            for (int i = 0; i < strip._numLeds; i++)
-            {
-                strip.setPixelColor(i, lastColors[i]);
-            }
+            LoadColors();
         }
     }
 
@@ -64,12 +63,26 @@ public class ExampleEffects : MonoBehaviour {
         {
             on = false;
             randomOn = false;
-            for (int i = 0; i < strip._numLeds; i++)
-            {
-                lastColors[i] = strip.GetPixelColor(i);
-            }
+
+            SaveColors();
 
             strip.SetAll(new Color32(0, 0, 0, 255));
+        }
+    }
+
+    private void SaveColors()
+    {
+        for (int i = 0; i < strip._numLeds; i++)
+        {
+            lastColors[i] = strip.GetPixelColor(i);
+        }
+    }
+
+    private void LoadColors()
+    {
+        for (int i = 0; i < strip._numLeds; i++)
+        {
+            strip.setPixelColor(i, lastColors[i]);
         }
     }
 }
