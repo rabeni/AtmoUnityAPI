@@ -57,9 +57,9 @@ public class SerialController : MonoBehaviour {
 
     private byte[] ProcessBytesForSending()
     {
+        // header, brightness, color bytes
         byte[] header = new byte[] { 0xff };
         buffer = header.Concat(strip.GetColorBytes()).ToArray();
-        print(buffer[3]);
         return buffer;
     }
 }

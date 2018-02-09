@@ -6,6 +6,7 @@ public class Strip : MonoBehaviour
     private Renderer[] _leds = new Renderer[144];
     [HideInInspector]
     public int _numLeds = 144;
+    public byte brightness = 0;
     [SerializeField]
     private GameObject _led;
 
@@ -22,7 +23,6 @@ public class Strip : MonoBehaviour
     public void setPixelColor(int index, Vector3 color)
     {
         Color32 c = new Color32((byte)color.x, (byte)color.y, (byte)color.z, 255);
-        c = ReserveHeaderValue(c);
 
         if (index > (_numLeds - 1))
         {
@@ -35,8 +35,6 @@ public class Strip : MonoBehaviour
     //set index pixel color
     public void setPixelColor(int index, Color32 color)
     {
-        color = ReserveHeaderValue(color);
-
         if (index > (_numLeds - 1))
         {
             index = index - _numLeds - 1;
@@ -48,9 +46,6 @@ public class Strip : MonoBehaviour
     //set all pixel colors
     public void SetAll(Color32 color)
     {
-
-        color = ReserveHeaderValue(color);
-
         for (int i = 0; i < _numLeds; i++)
         {
             setPixelColor(i, color);
@@ -60,9 +55,6 @@ public class Strip : MonoBehaviour
     //set all pixel r values
     public void SetAllR(float r)
     {
-
-        r = ReserveHeaderValue(r);
-
         for (int i = 0; i < _numLeds; i++)
         {
             SetLedColor(i, new Color(r, _leds[i].material.GetColor("_Color").g, _leds[i].material.GetColor("_Color").b));
@@ -72,9 +64,6 @@ public class Strip : MonoBehaviour
     //set all pixel r values
     public void SetAllR(byte r)
     {
-
-        r = ReserveHeaderValue(r);
-
         for (int i = 0; i < _numLeds; i++)
         {
             SetLedColor(i, new Color(r, _leds[i].material.GetColor("_Color").g, _leds[i].material.GetColor("_Color").b));
@@ -84,9 +73,6 @@ public class Strip : MonoBehaviour
     //set all pixel g values
     public void SetAllG(float g)
     {
-
-        g = ReserveHeaderValue(g);
-
         for (int i = 0; i < _numLeds; i++)
         {
             SetLedColor(i, new Color(_leds[i].material.GetColor("_Color").r, g, _leds[i].material.GetColor("_Color").b));
@@ -96,9 +82,6 @@ public class Strip : MonoBehaviour
     //set all pixel g values
     public void SetAllG(byte g)
     {
-
-        g = ReserveHeaderValue(g);
-
         for (int i = 0; i < _numLeds; i++)
         {
             SetLedColor(i, new Color(_leds[i].material.GetColor("_Color").r, g, _leds[i].material.GetColor("_Color").b));
@@ -108,8 +91,6 @@ public class Strip : MonoBehaviour
     //set all pixel b values
     public void SetAllB(float b)
     {
-        b = ReserveHeaderValue(b);
-
         for (int i = 0; i < _numLeds; i++)
         {
             SetLedColor(i, new Color(_leds[i].material.GetColor("_Color").r, _leds[i].material.GetColor("_Color").g, b));
@@ -119,8 +100,6 @@ public class Strip : MonoBehaviour
     //set all pixel b values
     public void SetAllB(byte b)
     {
-        b = ReserveHeaderValue(b);
-
         for (int i = 0; i < _numLeds; i++)
         {
             SetLedColor(i, new Color(_leds[i].material.GetColor("_Color").r, _leds[i].material.GetColor("_Color").g, b));
@@ -130,6 +109,27 @@ public class Strip : MonoBehaviour
     public Color32 GetPixelColor(int index)
     {
         return GetLedColor(index);
+    }
+
+    public byte[] GetColorBytes()
+    {
+        int byteIndex = 0;
+
+        //+1 for brightness
+        byte[] byteValues = new byte[_numLeds * 3 + 1];
+
+        lock (this)
+        {
+            byteValues[byteIndex++] = MapByte(brightness);
+            foreach (Renderer led in _leds)
+            {
+                Color32 c = (Color32)led.material.color;
+                byteValues[byteIndex++] = MapByte(c.r);
+                byteValues[byteIndex++] = MapByte(c.g);
+                byteValues[byteIndex++] = MapByte(c.b);
+            }
+        }
+        return byteValues;
     }
 
     #endregion
@@ -153,44 +153,6 @@ public class Strip : MonoBehaviour
         }
     }
 
-    //255 is reserved for serial communication header
-    private Color32 ReserveHeaderValue(Color32 color)
-    {
-        if (color.r >= 255)
-        {
-            color.r = 244;
-        }
-        if (color.g >= 255)
-        {
-            color.g = 244;
-        }
-        if (color.b >= 255)
-        {
-            color.b = 244;
-        }
-        return color;
-    }
-
-    //255 is reserved for serial communication header
-    private float ReserveHeaderValue(float color)
-    {
-        if (color >= 1)
-        {
-            color = 0.99f;
-        }
-        return color;
-    }
-
-    //255 is reserved for serial communication header
-    private byte ReserveHeaderValue(byte color)
-    {
-        if (color >= 255)
-        {
-            color = 254;
-        }
-        return color;
-    }
-
     private void SetLedColor(int index, Color32 color)
     {
         _leds[index].material.SetColor("_Color", color);
@@ -201,23 +163,13 @@ public class Strip : MonoBehaviour
         return _leds[index].material.GetColor("_Color");
     }
 
-    public byte[] GetColorBytes()
+    // Maps byte between 0-244. 255 is kept for header.
+    private byte MapByte(byte b) 
     {
-        int byteIndex = 0;
+        if (b > 244)
+            b = 244;
 
-        byte[] byteValues = new byte[_numLeds * 3];
-
-        lock (this)
-        {
-            foreach (Renderer led in _leds)
-            {
-                Color32 c = (Color32)led.material.color;
-                byteValues[byteIndex++] = c.r;
-                byteValues[byteIndex++] = c.g;
-                byteValues[byteIndex++] = c.b;
-            }
-        }
-        return byteValues;
+        return b;
     }
 
     #endregion
