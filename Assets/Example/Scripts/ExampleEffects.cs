@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ExampleEffects : MonoBehaviour {
@@ -16,7 +15,7 @@ public class ExampleEffects : MonoBehaviour {
 
         lastColors = new Color32[strip._numLeds];
 
-        strip.SetAll(new Color32(10,12,3,255));
+        strip.SetAll(new Color32(0,0,33,255));
 
     }
 

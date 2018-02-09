@@ -111,6 +111,11 @@ public class Strip : MonoBehaviour
         brightness = value;
     }
 
+    public void SetBrightness(float value)
+    {
+        brightness = (byte)(255 * value);
+    }
+
     public Color32 GetPixelColor(int index)
     {
         return GetLedColor(index);
