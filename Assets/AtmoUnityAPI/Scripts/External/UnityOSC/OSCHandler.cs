@@ -83,7 +83,7 @@ public class OSCHandler : MonoBehaviour
 	private Dictionary<string, ClientLog> _clients = new Dictionary<string, ClientLog>();
 	private Dictionary<string, ServerLog> _servers = new Dictionary<string, ServerLog>();
 
-	private string ipAddress = "";
+	//private string ipAddress = "";
 
 	private const int _loglength = 25;
    	#endregion
