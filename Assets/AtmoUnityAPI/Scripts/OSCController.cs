@@ -37,8 +37,6 @@ public class OSCController : MonoBehaviour
             int eventType = Int32.Parse(packet.Data[0].ToString());
             int diceType = Int32.Parse(packet.Data[1].ToString());
             int diceId = Int32.Parse(packet.Data[2].ToString());
-            int diceProjectedX = Int32.Parse(packet.Data[3].ToString());
-            int diceProjectedY = Int32.Parse(packet.Data[4].ToString());
             Vector2 pixelPosition = new Vector2(Int32.Parse(packet.Data[3].ToString()), Int32.Parse(packet.Data[4].ToString()));
             Vector2 diceWorldPosition = GetWorldPosition(pixelPosition);
 
