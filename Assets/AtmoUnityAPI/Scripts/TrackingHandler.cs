@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+  TrackingHandler.cs - This script processes marker data that arrives via OSC 
+  from Atmo. It invokes the following marker events: detected, lost, redetected.
+  Created by Atmo, February 2, 2018.
+*/
+
+using UnityEngine;
 using System;
 using UnityEngine.Events;
 

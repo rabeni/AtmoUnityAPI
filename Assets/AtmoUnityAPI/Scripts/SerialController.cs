@@ -1,5 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+  SerialController.cs - This script handles the serial communication 
+  between Unity and Atmo lights. It periodically fills the outputQueue with
+  led color data that is periodically sent in a separate thread via a serial 
+  port.
+  Created by Atmo, February 2, 2018.
+*/
+
+using System.Collections;
 using UnityEngine;
 using System.Threading;
 using System.Linq;

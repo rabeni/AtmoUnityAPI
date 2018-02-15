@@ -1,5 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/*
+  Strip.cs - This script provides functions to control the AtmoLight strip.
+  All public functions can be used to control the leds in different ways.
+  There are 144 leds to control which are represented by Led GameObjects in Unity.
+  They can be seen if you zoom out in the Scene view.
+  Created by Atmo, February 2, 2018.
+*/
+
+using UnityEngine;
 
 public class Strip : MonoBehaviour
 {
@@ -13,14 +20,13 @@ public class Strip : MonoBehaviour
     void Awake()
     {
         Init();
-
-        SetAll(new Color32(20, 0, 0, 255));
+        SetAll(new Color32(0, 0, 0, 255));
     }
 
     #region Public Methods
 
     //set index pixel's color
-    public void setPixelColor(int index, Vector3 color)
+    public void SetPixelColor(int index, Vector3 color)
     {
         Color32 c = new Color32((byte)color.x, (byte)color.y, (byte)color.z, 255);
 
@@ -33,7 +39,7 @@ public class Strip : MonoBehaviour
     }
 
     //set index pixel color
-    public void setPixelColor(int index, Color32 color)
+    public void SetPixelColor(int index, Color32 color)
     {
         if (index > (_numLeds - 1))
         {
@@ -48,7 +54,7 @@ public class Strip : MonoBehaviour
     {
         for (int i = 0; i < _numLeds; i++)
         {
-            setPixelColor(i, color);
+            SetPixelColor(i, color);
         }
     }
 

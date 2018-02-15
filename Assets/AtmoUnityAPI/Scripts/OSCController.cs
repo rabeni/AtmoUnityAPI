@@ -1,4 +1,9 @@
 ﻿using UnityEngine;
+/*
+  OSCController.cs - This script controls the OSC communication with Atmo.
+  Created by Atmo, February 2, 2018.
+*/
+
 using System;
 using UnityEngine.Events;
 using UnityOSC;

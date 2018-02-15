@@ -1,5 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+  Marker.cs - Marker class implementation.
+  Created by Atmo, February 2, 2018.
+*/
+
 using UnityEngine;
 
 public class Marker 

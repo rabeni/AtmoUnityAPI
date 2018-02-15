@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+  ExampleEffects.cs - This script contains handles for button pushes.
+  It provides some insight on the usage of AtmoLight.
+  Created by Atmo, February 2, 2018.
+*/
+
+using System.Collections;
 using UnityEngine;
 
 public class ExampleEffects : MonoBehaviour {
@@ -34,20 +40,6 @@ public class ExampleEffects : MonoBehaviour {
         randomOn = false;
     }
 
-    private IEnumerator RandomEffect()
-    {
-        while (randomOn)
-        {
-            for (int i = 0; i < strip._numLeds; i++)
-            {
-                strip.setPixelColor(i, new Color32((byte)Random.Range(0,20),(byte)Random.Range(0, 20),(byte)Random.Range(0, 20),255));
-            }
-
-            yield return new WaitForSeconds(0.1f);
-        }
-        LoadColors();
-    }
-
     public void StripOn()
     {
         if (!on)
@@ -70,6 +62,20 @@ public class ExampleEffects : MonoBehaviour {
         }
     }
 
+    private IEnumerator RandomEffect()
+    {
+        while (randomOn)
+        {
+            for (int i = 0; i < strip._numLeds; i++)
+            {
+                strip.SetPixelColor(i, new Color32((byte)Random.Range(0, 20), (byte)Random.Range(0, 20), (byte)Random.Range(0, 20), 255));
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+        LoadColors();
+    }
+
     private void SaveColors()
     {
         for (int i = 0; i < strip._numLeds; i++)
@@ -82,7 +88,7 @@ public class ExampleEffects : MonoBehaviour {
     {
         for (int i = 0; i < strip._numLeds; i++)
         {
-            strip.setPixelColor(i, lastColors[i]);
+            strip.SetPixelColor(i, lastColors[i]);
         }
     }
 }

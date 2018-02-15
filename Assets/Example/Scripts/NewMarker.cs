@@ -1,9 +1,18 @@
-﻿using UnityEngine;
+﻿/*
+  NewMarker.cs - This script handles the onDetected event of Tracking Handler.
+  It puts GameObjects with colored circle sprites on the scene in the position 
+  of markers found on the table. GameObjects are named by the corresponding 
+  markers' unique ids. Circle color depends on the ID of the marker.
+  Created by Atmo, February 2, 2018.
+*/
+
+using UnityEngine;
 
 public class NewMarker : MonoBehaviour {
 
     public GameObject highlight;
 
+    // Handles onDetected event of Tracking Handler
     public void HandleOnDetected(Marker marker)
     {
         switch (marker.markerID)
