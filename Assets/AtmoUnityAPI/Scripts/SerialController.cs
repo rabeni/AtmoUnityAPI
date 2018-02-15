@@ -28,7 +28,7 @@ public class SerialController : MonoBehaviour {
         StartThread();
     }
 
-    public void StartThread()
+    private void StartThread()
     {
         outputQueue = Queue.Synchronized(new Queue());
 
@@ -39,7 +39,7 @@ public class SerialController : MonoBehaviour {
         thread.Start();
     }
 
-    public void ThreadLoop()
+    private void ThreadLoop()
     {
         while (true)
         {
