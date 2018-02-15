@@ -94,8 +94,8 @@ public class OSCHandler : MonoBehaviour
 	/// </summary>
 	public void Init()
 	{
-		ipAddress = Network.player.ipAddress; //sets the ipAddress of the current machine running the Unity application
-		Debug.Log (ipAddress);
+		//ipAddress = Network.player.ipAddress; //sets the ipAddress of the current machine running the Unity application
+		//Debug.Log (ipAddress);
         //Initialize OSC clients (transmitters)
         //Example:		
 		//CreateClient("TouchOSC Bridge", IPAddress.Parse("192.168.2.3"), 9000);
