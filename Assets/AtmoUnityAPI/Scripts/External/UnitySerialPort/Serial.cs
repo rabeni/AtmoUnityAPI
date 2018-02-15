@@ -170,7 +170,6 @@ public class Serial : MonoBehaviour
 
     void Start()
     {
-        // print ("Serial Start ");
     }
 
     void OnValidate()
@@ -196,7 +195,6 @@ public class Serial : MonoBehaviour
         }
 
         checkOpen(BAUD);
-
     }
 
     void OnDisable()
@@ -450,7 +448,8 @@ public class Serial : MonoBehaviour
 
             if (portName == "")
             {
-                print("Error: Couldn't find serial port.");
+                //print("Error: Couldn't find serial port.");
+                Debug.Log("AtmoLight could not connect. Check if USB is connected.");
                 return false;
             }
             else
@@ -467,6 +466,11 @@ public class Serial : MonoBehaviour
 
             // clear input buffer from previous garbage
             s_serial.DiscardInBuffer();
+
+            if (s_serial.IsOpen)
+                Debug.Log("AtmoLight is connected.");
+            else
+                Debug.Log("AtmoLight could not connect. Check if USB is connected.");
         }
 
         return s_serial.IsOpen;
