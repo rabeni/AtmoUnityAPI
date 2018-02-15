@@ -468,9 +468,9 @@ public class Serial : MonoBehaviour
             s_serial.DiscardInBuffer();
 
             if (s_serial.IsOpen)
-                Debug.Log("AtmoLight is connected.");
+                Debug.Log("Atmo is connected.");
             else
-                Debug.Log("AtmoLight could not connect. Check if USB is connected.");
+                Debug.Log("Could not connect to Atmo. Check if USB is connected.");
         }
 
         return s_serial.IsOpen;
