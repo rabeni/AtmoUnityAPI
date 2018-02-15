@@ -1,21 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LostMarker : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public void HandleOnLost(int markerID, int uniqueID, Vector2 position)
+    public void HandleOnLost(Marker marker)
     {
-        Destroy(GameObject.Find(uniqueID.ToString()));
+        Destroy(GameObject.Find(marker.uniqueID.ToString()));
     }
 }

@@ -7,10 +7,9 @@ public class TrackingHandler : MonoBehaviour
     private enum CallbackType { Detected, Lost, ReDetected };
 
     private Transform Dice;
-    public Camera MainCamera;
 
     [Serializable]
-    public class CallbackEvent : UnityEvent<int, int, Vector2>
+    public class CallbackEvent : UnityEvent<Marker>
     {
     }
     public CallbackEvent onDetectedEvent;
@@ -19,40 +18,29 @@ public class TrackingHandler : MonoBehaviour
 
     void Start()
     {
-        MainCamera = Camera.main;
-
-        // Listner for new OSC data
-        GetComponent<OSCController>().onNewOSCData.AddListener(ProcessOSCData);
+        // Listner for new marker data via OSC
+        GetComponent<OSCController>().onNewOSCData.AddListener(InvokeMarkerEvents);
     }
 
-    // Invokes events based on types of dice data received via OSC
-    private void ProcessOSCData(Marker newDice)
+    // Invokes events based on type of marker data received
+    private void InvokeMarkerEvents(Marker newMarker)
     {
-        Vector2 worldPosition = GetWorldPosition(newDice);
-
-        switch (newDice.eventType)
+        switch (newMarker.eventType)
         {
             case (int)CallbackType.Detected:
-                onDetectedEvent.Invoke(newDice.markerID, newDice.uniqueID, worldPosition);
+                onDetectedEvent.Invoke(newMarker);
                 break;
 
             case (int)CallbackType.Lost:
-                onLostEvent.Invoke(newDice.markerID, newDice.uniqueID, worldPosition);
+                onLostEvent.Invoke(newMarker);
                 break;
 
             case (int)CallbackType.ReDetected:
-                onRedetectedEvent.Invoke(newDice.markerID, newDice.uniqueID, worldPosition);
+                onRedetectedEvent.Invoke(newMarker);
                 break;
 
             default:
                 break;
         }
-    }
-
-    // Converts camera position to Unity world position
-    private Vector2 GetWorldPosition(Marker newDice)
-    {
-        Vector2 camPosition = new Vector2(newDice.camX, 800 - newDice.camY);
-        return MainCamera.ScreenToWorldPoint(camPosition);
     }
 }

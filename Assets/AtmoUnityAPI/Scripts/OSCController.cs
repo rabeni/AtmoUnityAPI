@@ -34,8 +34,10 @@ public class OSCController : MonoBehaviour
             int diceId = Int32.Parse(packet.Data[2].ToString());
             int diceProjectedX = Int32.Parse(packet.Data[3].ToString());
             int diceProjectedY = Int32.Parse(packet.Data[4].ToString());
+            Vector2 pixelPosition = new Vector2(Int32.Parse(packet.Data[3].ToString()), Int32.Parse(packet.Data[4].ToString()));
+            Vector2 diceWorldPosition = GetWorldPosition(pixelPosition);
 
-            Marker newDice = new Marker(eventType, diceType, diceId, diceProjectedX, diceProjectedY);
+            Marker newDice = new Marker(eventType, diceType, diceId, diceWorldPosition);
 
             //Event invoked when new dice dice data arrives
             onNewOSCData.Invoke(newDice);
@@ -51,6 +53,13 @@ public class OSCController : MonoBehaviour
             _inputBuffer.Enqueue(packet);
 
         }
+    }
+
+    // Converts pixel position to Unity world position
+    private Vector2 GetWorldPosition(Vector2 pixelPosition)
+    {
+        Vector2 tmp = new Vector2(pixelPosition.x, 800 - pixelPosition.y);
+        return Camera.main.ScreenToWorldPoint(tmp);
     }
 
 }

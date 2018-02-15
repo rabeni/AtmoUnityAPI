@@ -6,16 +6,14 @@ public class Marker
 {
     public int eventType;
     public int markerID;     
-    public int uniqueID;   
-    public int camX;    // Marker position in camera coordinates
-    public int camY;    // Marker position in camera coordinates
+    public int uniqueID;
+    public Vector2 position;
 
-    public Marker(int eventType, int diceType, int diceId, int diceCamX, int diceCamY)
+    public Marker(int eventType, int markerId, int uniqueId, Vector2 worldPosition)
     {
         this.eventType = eventType;
-        this.markerID = diceType;
-        this.uniqueID = diceId;
-        this.camX = diceCamX;
-        this.camY = diceCamY;
+        this.markerID = markerId;
+        this.uniqueID = uniqueId;
+        this.position = worldPosition;
     }
 }
