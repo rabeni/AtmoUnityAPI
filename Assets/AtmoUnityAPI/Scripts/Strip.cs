@@ -25,7 +25,11 @@ public class Strip : MonoBehaviour
 
     #region Public Methods
 
-    //set index pixel's color
+    /// <summary>
+    /// Sets index-th pixel to color. 
+    /// </summary>
+    /// <param name="index">Pixel index.</param>
+    /// <param name="color">Pixel color. Parameters x,y,z stand for r,g,b.</param>
     public void SetPixelColor(int index, Vector3 color)
     {
         Color32 c = new Color32((byte)color.x, (byte)color.y, (byte)color.z, 255);
@@ -38,7 +42,11 @@ public class Strip : MonoBehaviour
         SetLedColor(index, c);
     }
 
-    //set index pixel color
+    /// <summary>
+    /// Sets index-th pixel to color. 
+    /// </summary>
+    /// <param name="index">Pixel index.</param>
+    /// <param name="color">Pixel color. Parameter a, alpha is not used.</param>
     public void SetPixelColor(int index, Color32 color)
     {
         if (index > (_numLeds - 1))
@@ -49,7 +57,10 @@ public class Strip : MonoBehaviour
         SetLedColor(index, color);
     }
 
-    //set all pixel colors
+    /// <summary>
+    /// Sets all pixel to color. 
+    /// </summary>
+    /// <param name="color">Pixel color. Parameter a, alpha is not used.</param>
     public void SetAll(Color32 color)
     {
         for (int i = 0; i < _numLeds; i++)
@@ -58,7 +69,10 @@ public class Strip : MonoBehaviour
         }
     }
 
-    //set all pixel r values
+    /// <summary>
+    /// Sets r value of all pixels.
+    /// </summary>
+    /// <param name="r">Red.</param>
     public void SetAllR(float r)
     {
         for (int i = 0; i < _numLeds; i++)
@@ -67,7 +81,10 @@ public class Strip : MonoBehaviour
         }
     }
 
-    //set all pixel r values
+    /// <summary>
+    /// Sets r value of all pixels.
+    /// </summary>
+    /// <param name="r">Red.</param>
     public void SetAllR(byte r)
     {
         for (int i = 0; i < _numLeds; i++)
@@ -76,7 +93,10 @@ public class Strip : MonoBehaviour
         }
     }
 
-    //set all pixel g values
+    /// <summary>
+    /// Sets g value of all pixels.
+    /// </summary>
+    /// <param name="g">Green.</param>
     public void SetAllG(float g)
     {
         for (int i = 0; i < _numLeds; i++)
@@ -85,7 +105,10 @@ public class Strip : MonoBehaviour
         }
     }
 
-    //set all pixel g values
+    /// <summary>
+    /// Sets g value of all pixels.
+    /// </summary>
+    /// <param name="g">Green.</param>
     public void SetAllG(byte g)
     {
         for (int i = 0; i < _numLeds; i++)
@@ -94,7 +117,10 @@ public class Strip : MonoBehaviour
         }
     }
 
-    //set all pixel b values
+    /// <summary>
+    /// Sets b value of all pixels.
+    /// </summary>
+    /// <param name="b">Blue.</param>
     public void SetAllB(float b)
     {
         for (int i = 0; i < _numLeds; i++)
@@ -103,7 +129,10 @@ public class Strip : MonoBehaviour
         }
     }
 
-    //set all pixel b values
+    /// <summary>
+    /// Sets b value of all pixels.
+    /// </summary>
+    /// <param name="b">Blue.</param>
     public void SetAllB(byte b)
     {
         for (int i = 0; i < _numLeds; i++)
@@ -112,21 +141,38 @@ public class Strip : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets brightness value of all pixels.
+    /// </summary>
+    /// <param name="value">Brightness value (0-255).</param>
     public void SetBrightness(byte value)
     {
         brightness = value;
     }
 
+    /// <summary>
+    /// Sets brightness value of all pixels.
+    /// </summary>
+    /// <param name="value">Brightness value (0-1).</param>
     public void SetBrightness(float value)
     {
         brightness = (byte)(255 * value);
     }
 
+    /// <summary>
+    /// Gets color of index-th pixel.
+    /// </summary>
+    /// <param name="index">Pixel index.</param>
+    /// <returns>Color.</returns>  
     public Color32 GetPixelColor(int index)
     {
         return GetLedColor(index);
     }
 
+    /// <summary>
+    /// Gets byte stream of brightness and all pixel colors mapped under 255 to maintain that for serial header.
+    /// </summary>
+    /// <returns>Byte stream of brightness and all pixel colors.</returns>
     public byte[] GetColorBytes()
     {
         int byteIndex = 0;
