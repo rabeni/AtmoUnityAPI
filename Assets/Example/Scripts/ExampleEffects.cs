@@ -22,7 +22,6 @@ public class ExampleEffects : MonoBehaviour {
         lastColors = new Color32[strip._numLeds];
 
         strip.SetAll(new Color32(0,0,33,255));
-
     }
 
     public void RandomOn()
