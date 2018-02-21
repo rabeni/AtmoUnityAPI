@@ -20,15 +20,15 @@ AtmoUnityAPI interfaces Atmo with Unity. AtmoTracking provides marker events, At
 
 The AtmoTracking gameobject is responsible for marker tracking. The TrackingHandler script provides marker detection information with the help of three events with a Marker object argument: onDetected, onRedetected and onLost. 
 
-#### onDetected
+#### onDetected event
 
 This event is invoked when a new marker is detected on the table.
 
-#### onLost
+#### onLost event
 
 This event is invoked when a marker disappears from the table. This can also happen if a marker is hidden by another object or by someone's hand.
 
-#### onRedetected
+#### onRedetected event
 
 Lost markers are saved in a history for 5 seconds. In case the same marker appears on the same location within this 5 seconds, this event is invokeded instead of the onDetected.
 
@@ -90,4 +90,8 @@ Functions usally take a Vector3 or Color32 color argument. In case of Vector3, (
 LED pixels are also visualised on the Scene as spheres. This can help to sync orientation of light animations with projections.
 
 ![LED pixels on Scene](/readme-imgs/leds.png)
+
+## Example
+
+//Todo
 
