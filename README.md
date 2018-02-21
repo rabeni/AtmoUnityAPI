@@ -5,15 +5,16 @@ AtmoUnityAPI interfaces Atmo with Unity. AtmoTracking provides marker events, At
 ## Getting started
 
 1. Download the repository. 
-2. Create a new Unity project.
-3. Add a new resolution on the Game view with fixed resolution of 1280x800.
+2. Download the AtmoTracker application. LINK
+3. Create a new Unity project.
+4. Add a new resolution on the Game view with fixed resolution of 1280x800.
 
 ![Add new resolution](/readme-imgs/atmo-resolution.png)
 
-4. Go to Edit | Project Settings | Player | PC, Mac & Linux Standalone settings | Other Settings | Optimization | API Compatibility Level and select ".Net 2.0".
-5. Copy the content of the AtmoUnityAPI-master/Assets folder in your Unity project's Assets folder.
-6. (a) Open the Example scene in the Example folder. 
-6. (b) Start development with the Template scene in the AtmoUnityAPI folder.
+5. Go to Edit | Project Settings | Player | PC, Mac & Linux Standalone settings | Other Settings | Optimization | API Compatibility Level and select ".Net 2.0".
+6. Copy the content of the AtmoUnityAPI-master/Assets folder in your Unity project's Assets folder.
+7. (a) Open the Example scene in the Example folder. 
+7. (b) Start development with the Template scene in the AtmoUnityAPI folder.
 
 ## AtmoTracking
 
@@ -66,4 +67,27 @@ void HandleOnLost(Marker marker) {
 ```
 
 ## AtmoLight
+
+The AtmoLight gameobject is responsible for controlling the 144 pixel LED strip in Atmo. 
+
+#### Usage
+
+The public functions in the Strip script can be used for controlling the LED pixels. Best way to use it is to add a new script to AtmoLight, get the Strip script from there and call the needed functions.
+
+```
+Strip strip;
+
+void Start() {
+  strip = GetComponent<Strip>();
+  
+  // This sets all pixel colors to red
+  strip.SetAll(new Color32(200,0,0,255));
+}
+```
+
+Functions usally take a Vector3 or Color32 color argument. In case of Vector3, (x,y,z) attributes stand for (r,g,b). In case of Color32, the a (alpha) argument is only used for the virtual representation of the LED pixels but not for the real ones.
+
+LED pixels are also visualised on the Scene as spheres. This can help to sync orientation of light animations with projections.
+
+
 
