@@ -89,5 +89,5 @@ Functions usally take a Vector3 or Color32 color argument. In case of Vector3, (
 
 LED pixels are also visualised on the Scene as spheres. This can help to sync orientation of light animations with projections.
 
-
+![LED pixels on Scene](/readme-imgs/leds.png)
 
