@@ -6,7 +6,10 @@ AtmoUnityAPI interfaces Atmo with Unity. AtmoTracking provides marker events, At
 
 1. Download the repository. 
 2. Create a new Unity project.
-3. Add a new resolution on the Game view: atmo, fixed resolution, 1280x800.
+3. Add a new resolution on the Game view with fixed resolution of 1280x800.
+
+![Add new resolution](/readme-imgs/atmo-resolution.png)
+
 4. Go to Edit | Project Settings | Player | PC, Mac & Linux Standalone settings | Other Settings | Optimization | API Compatibility Level and select ".Net 2.0".
 5. Copy the content of the AtmoUnityAPI-master/Assets folder in your Unity project's Assets folder.
 6. (a) Open the Example scene in the Example folder. 
