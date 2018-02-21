@@ -1,6 +1,6 @@
 # AtmoUnityAPI
 
-AtmoUnityAPI interfaces Atmo with Unity. AtmoTracking is responsible for providing information about marker detections, AtmoLight is used to control the light strip in Atmo.
+AtmoUnityAPI interfaces Atmo with Unity. [AtmoTracking](/README.md#atmotracking) is responsible for providing information about marker detections, [AtmoLight](/README.md#atmolight) is used to control the light strip in Atmo.
 
 ## Getting started
 
@@ -13,7 +13,7 @@ AtmoUnityAPI interfaces Atmo with Unity. AtmoTracking is responsible for providi
 
 5. Go to Edit | Project Settings | Player | PC, Mac & Linux Standalone settings | Other Settings | Optimization | API Compatibility Level and select ".Net 2.0".
 6. Copy the content of the AtmoUnityAPI-master/Assets folder in your Unity project's Assets folder.
-7. (a) Open the Example scene in the Example folder. 
+7. (a) Open the [Example](/README.md#exemple) scene in the Example folder. 
 7. (b) Start development with the Template scene in the AtmoUnityAPI folder.
 8. Start the AtmoTracking application to get marker detection information in Unity.
 
