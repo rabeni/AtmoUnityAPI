@@ -1,11 +1,11 @@
 # AtmoUnityAPI
 
-AtmoUnityAPI interfaces Atmo with Unity. AtmoTracking provides marker events, AtmoLight is used to control the light strip in Atmo.
+AtmoUnityAPI interfaces Atmo with Unity. AtmoTracking is responsible for providing information about marker detections, AtmoLight is used to control the light strip in Atmo.
 
 ## Getting started
 
 1. Download the repository. 
-2. Download the AtmoTracker application. LINK
+2. Download the [AtmoTracker](https://drive.google.com/open?id=1kbp9axj-XiajeSmUythjto_DjogPtuax) application.
 3. Create a new Unity project.
 4. Add a new resolution on the Game view with fixed resolution of 1280x800.
 
@@ -15,6 +15,7 @@ AtmoUnityAPI interfaces Atmo with Unity. AtmoTracking provides marker events, At
 6. Copy the content of the AtmoUnityAPI-master/Assets folder in your Unity project's Assets folder.
 7. (a) Open the Example scene in the Example folder. 
 7. (b) Start development with the Template scene in the AtmoUnityAPI folder.
+8. Start the AtmoTracking application to get marker detection information in Unity.
 
 ## AtmoTracking
 
