@@ -27,7 +27,7 @@ This event is invoked when a new marker is detected on the table.
 
 This event is invoked when a marker disappears from the table. This can also happen if a marker is hidden by another object or by someone's hand.
 
-#### onReDetected
+#### onRedetected
 
 Lost markers are saved in a history for 5 seconds. In case the same marker appears on the same location within this 5 seconds, this event is invokeded instead of the onDetected.
 
@@ -36,14 +36,34 @@ Lost markers are saved in a history for 5 seconds. In case the same marker appea
 The marker object contains the following information about a marker:
 
 ```
-int markerID;       # id of the marker, same for identical markers
-int uniqueID;       # unique id of detection, remains the same for all three events invoked by the same detection
-Vector2 Position;   # postion of the marker in Unity world space
+int markerID;       // id of the marker, same for identical markers
+int uniqueID;       // unique id of detection, remains the same for all three events invoked by the same detection
+Vector2 Position;   // postion of the marker in Unity world space
 ```
 
 #### Usage
 
 Listeners to the events can be either added on the editor or in script.
+
+![Add listeners](/readme-imgs/tracking-events.png)
+
+```
+GetComponent<TrackingHandler>().onDetected.AddListener(HandleOnDetected);
+GetComponent<TrackingHandler>().onReDetected.AddListener(HandleOnRedetected);
+GetComponent<TrackingHandler>().onLost.AddListener(HandleOnLost);
+
+void HandleOnDetected(Marker marker) {
+  //Your code to handle new markers
+}
+
+void HandleOnRedetected(Marker marker) {
+  //Your code to handle redetected markers
+}
+
+void HandleOnLost(Marker marker) {
+  //Your code to handle lost markers
+}
+```
 
 ## AtmoLight
 
