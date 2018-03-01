@@ -559,7 +559,7 @@ public class Serial : MonoBehaviour
 
             case RuntimePlatform.OSXPlayer:
             case RuntimePlatform.OSXEditor:
-            case RuntimePlatform.OSXDashboardPlayer:
+            //case RuntimePlatform.OSXDashboardPlayer:
             case RuntimePlatform.LinuxPlayer:
 
                 portNames = System.IO.Ports.SerialPort.GetPortNames();
