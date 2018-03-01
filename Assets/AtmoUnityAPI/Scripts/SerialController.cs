@@ -18,7 +18,6 @@ public class SerialController : MonoBehaviour {
 
     private const float periodSec = 0.02f;
     private byte[] buffer;
-    private byte[] threadBuffer;
     private Strip strip;
 
     void Start()
