@@ -1,7 +1,7 @@
 ﻿/*
   Strip.cs - This script provides functions to control the AtmoLight strip.
   All public functions can be used to control the leds in different ways.
-  There are 144 leds to control which are represented by Led GameObjects in Unity.
+  There are 144 pixels to control which are represented by Led GameObjects in Unity.
   They can be seen if you zoom out in the Scene view.
   Created by Atmo, February 2, 2018.
 */
