@@ -8,8 +8,11 @@ using UnityEngine;
 public class Marker 
 {
     public int eventType;
-    public int markerID;     
+    /// <summary>Id of the marker, same for identical markers.</summary>
+    public int markerID;  
+    /// <summary>Unique id of detection, remains the same for all three events invoked by the same detection.</summary>
     public int uniqueID;
+    /// <summary>postion of the marker in Unity world space.</summary>
     public Vector2 position;
 
     public Marker(int eventType, int markerId, int uniqueId, Vector2 worldPosition)
