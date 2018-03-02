@@ -5,7 +5,7 @@ AtmoUnityAPI interfaces Atmo with Unity. [AtmoTracking](/README.md#atmotracking)
 ## Getting started
 
 1. Download the repository. 
-2. Download the [AtmoTracker](https://drive.google.com/open?id=1kbp9axj-XiajeSmUythjto_DjogPtuax) application.
+2. Download the [Atmo](https://drive.google.com/open?id=1f1otSv8IMblzydiY8H3JYWuvqMB1iluG) application.
 3. Create a new Unity project.
 4. Add a new resolution on the Game view with fixed resolution of 1280x800.
 
@@ -15,7 +15,7 @@ AtmoUnityAPI interfaces Atmo with Unity. [AtmoTracking](/README.md#atmotracking)
 6. Copy the content of the AtmoUnityAPI-master/Assets folder in your Unity project's Assets folder.
 7. (a) Open the [Example](/README.md#exemple) scene in the Example folder. 
 7. (b) Start development with the Template scene in the AtmoUnityAPI folder.
-8. Start the AtmoTracking application to get marker detection information in Unity.
+8. Start the Atmo application anc click Tracking to get marker detection information in Unity. If more cameras are attached to your computer, you'll have to choose the right camera id in the application.
 
 ## AtmoTracking
 
@@ -94,5 +94,9 @@ LED pixels are also visualised on the Scene as spheres. This can help to sync or
 
 ## Example
 
-//Todo
+Open the Example scene in the Example folder. This basic application provides a basic summary of the AtmoUnityAPI. It highlight markers on the table with the corresponding colors denoted on the interface. Furthermore, lights can be controled with buttons and sliders on the screen.
+
+![Example scene](/readme-imgs/example.png)
+
+
 
