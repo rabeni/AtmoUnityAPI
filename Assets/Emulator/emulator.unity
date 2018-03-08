@@ -1531,7 +1531,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710bbbadb00874e3799872166e641443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  markerId: 0
+  markerSprites:
+  - {fileID: 1220940852694244, guid: 2574888dccd3f453ab0e57eb23262479, type: 2}
+  - {fileID: 1442092415940862, guid: d6f21958ab29a4a15959939b6157193d, type: 2}
+  - {fileID: 1703212035644682, guid: e01caa72dcfce4c128a1ef7c32f00db6, type: 2}
+  - {fileID: 1479428197710250, guid: 48109234be17d406d88107e96225c0b7, type: 2}
+  - {fileID: 1285843553712038, guid: a558deb40d9b64f27bad03f0c56bc7e5, type: 2}
+  - {fileID: 1077932264471344, guid: 76e9b6d7fe05c4b348276822cf6baa6d, type: 2}
+  _markerId: 0
 --- !u!4 &1026907733
 Transform:
   m_ObjectHideFlags: 0
