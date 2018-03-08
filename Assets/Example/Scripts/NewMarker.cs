@@ -18,22 +18,22 @@ public class NewMarker : MonoBehaviour {
         switch (marker.markerID)
         {
             case 0:
-                AddHighlight(marker.position, new Color32(0xF8, 0xB0, 0x68, 255), marker.uniqueID);
+                AddHighlight(marker.position, new Color32(0xF8, 0xB0, 0x68, 100), marker.uniqueID);
                 break;
             case 1:
-                AddHighlight(marker.position, new Color32(0xFF, 0x4F, 0x68, 255), marker.uniqueID);
+                AddHighlight(marker.position, new Color32(0xFF, 0x4F, 0x68, 100), marker.uniqueID);
                 break;
             case 2:
-                AddHighlight(marker.position, new Color32(0x39, 0x46, 0x4e, 255), marker.uniqueID);
+                AddHighlight(marker.position, new Color32(0x39, 0x46, 0x4e, 100), marker.uniqueID);
                 break;
             case 3:
-                AddHighlight(marker.position, new Color32(0x6C, 0xE8, 0x90, 255), marker.uniqueID);
+                AddHighlight(marker.position, new Color32(0x6C, 0xE8, 0x90, 100), marker.uniqueID);
                 break;
             case 4:
-                AddHighlight(marker.position, new Color32(0x75, 0x61, 0xFF, 255), marker.uniqueID);
+                AddHighlight(marker.position, new Color32(0x75, 0x61, 0xFF, 100), marker.uniqueID);
                 break;
             case 5:
-                AddHighlight(marker.position, new Color32(0x00, 0x61, 0xFF, 255), marker.uniqueID);
+                AddHighlight(marker.position, new Color32(0x00, 0x61, 0xFF, 100), marker.uniqueID);
                 break;
             default:
                 break;

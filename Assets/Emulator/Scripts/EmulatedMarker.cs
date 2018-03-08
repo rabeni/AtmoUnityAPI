@@ -8,11 +8,11 @@ public class EmulatedMarker : MonoBehaviour {
     public bool hidden = false;
     public float hideTimeStamp = 0;
 
-    private Sprite diceFace;
+    private SpriteRenderer diceFace;
 
 	// Use this for initialization
 	void Start () {
-        diceFace = GetComponent<Sprite>();
+        diceFace = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -24,11 +24,15 @@ public class EmulatedMarker : MonoBehaviour {
     {
         hidden = true;
         hideTimeStamp = Time.time;
+
+        diceFace.color = new Color(diceFace.color.r, diceFace.color.g, diceFace.color.b, 0.2f);
     }
 
     public void Unhide()
     {
         hidden = false;
+
+        diceFace.color = new Color(diceFace.color.r, diceFace.color.g, diceFace.color.b, 1f);
     }
 
     public void Remove()
