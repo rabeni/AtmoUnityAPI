@@ -26,6 +26,9 @@ public class TrackingEmulator : MonoBehaviour {
 
         if (Input.GetMouseButtonUp(0))
         {
+            CheckEmptyClick();
+
+
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             EmulatedMarker existingMarker = CheckCollisionWithExistingMarker(mousePosition);
@@ -43,7 +46,24 @@ public class TrackingEmulator : MonoBehaviour {
         RemoveOverdueHiddenMarkers();
 	}
 
-    private EmulatedMarker CheckCollisionWithExistingMarker(Vector2 mousePosition)
+
+    // $$$$$$$$$$$$ tudja mire kattint$$$$$$$$
+    private void CheckEmptyClick()
+    {
+        Vector3 pos = Input.mousePosition;
+        pos.z = 10;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(pos);
+
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+        if (hit)
+        {
+            print(hit.collider.name);
+        }
+        
+    }
+
+	private EmulatedMarker CheckCollisionWithExistingMarker(Vector2 mousePosition)
     {
         EmulatedMarker existingMarker = null;
 
