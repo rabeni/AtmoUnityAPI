@@ -9,8 +9,13 @@ public class IdSelector : MonoBehaviour {
     private TrackingEmulator trackingEmulator;
     private int currentId = 0;
 
+    public float z = -2f;
+
 	// Use this for initialization
 	void Start () {
+
+        // set z postition to separate IdSelector clicks from other clicks
+        transform.position = new Vector3(transform.position.x, transform.position.y, z);
 
         trackingEmulator = transform.parent.GetComponent<TrackingEmulator>();
 
@@ -32,7 +37,7 @@ public class IdSelector : MonoBehaviour {
             Close();
 
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = transform.position.z;
+            mousePosition.z = z;
             Open(mousePosition);
 
             state = 1;
@@ -41,6 +46,7 @@ public class IdSelector : MonoBehaviour {
         if (state == 1)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = z;
             int id = CheckCollisionWithMarkerSelector(mousePosition);
 
             // if mouse is colliding with an IdSelectorMarker
@@ -51,25 +57,20 @@ public class IdSelector : MonoBehaviour {
                 currentId = id;
                 trackingEmulator._markerId = id;
                 Close();
-
-                print("clicked");
             }
         }
     }
 
-	
-
-
     private void Open(Vector3 center)
     {
-        int resolution = 6;
-        float radius = 0.7f;
+        int numOfItems = 6;
+        float radius = 0.6f;
 
         transform.position = center;
 
-        for (int i = 0; i < resolution; i++)
+        for (int i = 0; i < numOfItems; i++)
         {
-            float angle = i * Mathf.PI * 2 / resolution;
+            float angle = i * Mathf.PI * 2 / numOfItems;
             Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius + center;
 
             //markers[i].position = pos;
@@ -87,10 +88,12 @@ public class IdSelector : MonoBehaviour {
 
         for (int i = 1; i < resolution + 1; i++)
         {
-            //targetTransform.position = Vector3.Lerp(start, end, i/resolution);
             float x = EasingEquations.EaseInOutBack(start.x, end.x, i / resolution);
             float y = EasingEquations.EaseInOutBack(start.y, end.y, i / resolution);
-            targetTransform.position = new Vector3(x, y, 0);
+            targetTransform.position = new Vector3(x, y, targetTransform.position.z);
+
+            float scale = EasingEquations.EaseInOutBack(0, 1, i / resolution);
+            targetTransform.localScale = new Vector3(scale, scale, scale);
 
             yield return new WaitForSeconds(step);
         }
@@ -101,10 +104,12 @@ public class IdSelector : MonoBehaviour {
         for (int i = 0; i < 6; i++)
         {
             markers[i].transform.localPosition = new Vector3(0, 0, 0);
+
+            markers[i].transform.localScale = new Vector3(0, 0, 0);
         }
     }
 
-    private int CheckCollisionWithMarkerSelector(Vector2 mousePosition)
+    private int CheckCollisionWithMarkerSelector(Vector3 mousePosition)
     {
         int index = -1;
 

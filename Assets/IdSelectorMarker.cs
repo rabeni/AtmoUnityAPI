@@ -21,7 +21,6 @@ public class IdSelectorMarker : MonoBehaviour {
     void OnMouseOver()
     {
         marker.color = new Color32(255, 0, 0, 255);
-        print("halo");
     }
 
     void OnMouseExit()

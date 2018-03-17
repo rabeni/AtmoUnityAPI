@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TrackingEmulator : MonoBehaviour {
 
-    // for debug - to generate marker event with mouse click
     private TrackingHandler trackingHandler;
     private List<EmulatedMarker> existingMarkers = new List<EmulatedMarker>();
     private List<EmulatedMarker> hiddenMarkers = new List<EmulatedMarker>();
@@ -12,7 +11,6 @@ public class TrackingEmulator : MonoBehaviour {
     public GameObject[] markerSprites = new GameObject[6];
 
     private int uniqueId = 0;
-    private float markerRadius = 0.2395834f;
 
     public int _markerId;
 
@@ -24,46 +22,35 @@ public class TrackingEmulator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            CheckEmptyClick();
-
-
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            EmulatedMarker existingMarker = CheckCollisionWithExistingMarker(mousePosition);
-
-            if (existingMarker == null)
-                AddNewMarker(mousePosition, _markerId);
-
-            else if (existingMarker.hidden)
-                UnhideMarker(existingMarker);
-
-            else
-                HideMarker(existingMarker);
-        }
-
         RemoveOverdueHiddenMarkers();
 	}
 
+    // Add new marker
+	private void OnMouseUp()
+	{
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // between the emulator collider and IdSelector
+        mousePosition.z = -1;
 
-    // $$$$$$$$$$$$ tudja mire kattint$$$$$$$$
-    private void CheckEmptyClick()
-    {
-        Vector3 pos = Input.mousePosition;
-        pos.z = 10;
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(pos);
+        AddNewMarker(mousePosition, _markerId);
 
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-        if (hit)
-        {
-            print(hit.collider.name);
-        }
-        
     }
 
-	private EmulatedMarker CheckCollisionWithExistingMarker(Vector2 mousePosition)
+	private bool CheckCollisionWithEmulator(Vector3 mousePosition)
+    {
+        return transform.GetComponent<Collider2D>().bounds.Contains(mousePosition);
+    }
+
+    public void OnExistingClicked(EmulatedMarker clickedMarker)
+	{
+        if (clickedMarker.hidden)
+            UnhideMarker(clickedMarker);
+
+        else
+            HideMarker(clickedMarker);
+	}
+
+	private EmulatedMarker CheckCollisionWithExistingMarker(Vector3 mousePosition)
     {
         EmulatedMarker existingMarker = null;
 
@@ -71,7 +58,7 @@ public class TrackingEmulator : MonoBehaviour {
         for (int i = existingMarkers.Count - 1; i >= 0; i--)
         {
             // trigger onLost event if clicked in existing marker
-            if (Vector2.Distance(existingMarkers[i].marker.position, mousePosition) < markerRadius)
+            if (existingMarkers[i].transform.GetComponent<Collider2D>().bounds.Contains(mousePosition))
             {
                 existingMarker = existingMarkers[i];
             }
@@ -82,7 +69,7 @@ public class TrackingEmulator : MonoBehaviour {
 
     private void AddNewMarker(Vector3 mousePosition, int markerId)
     {
-        EmulatedMarker newMarker = Instantiate(markerSprites[markerId], mousePosition, Quaternion.identity).GetComponent<EmulatedMarker>();
+        EmulatedMarker newMarker = Instantiate(markerSprites[markerId], mousePosition, Quaternion.identity, transform).GetComponent<EmulatedMarker>();
         newMarker.marker = new Marker(0, _markerId, uniqueId++, mousePosition);
         existingMarkers.Add(newMarker);
         trackingHandler.onDetectedEvent.Invoke(newMarker.marker);

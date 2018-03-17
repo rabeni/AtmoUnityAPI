@@ -9,10 +9,14 @@ public class EmulatedMarker : MonoBehaviour {
     public float hideTimeStamp = 0;
 
     private SpriteRenderer diceFace;
+    private TrackingEmulator trackingEmulator;
 
 	// Use this for initialization
 	void Start () {
         diceFace = GetComponent<SpriteRenderer>();
+
+        // ezzel valami para van!!
+        trackingEmulator = transform.parent.GetComponent<TrackingEmulator>();
 	}
 	
 	// Update is called once per frame
@@ -39,4 +43,9 @@ public class EmulatedMarker : MonoBehaviour {
     {
         Destroy(gameObject);
     }
+
+	private void OnMouseUp()
+	{
+        trackingEmulator.OnExistingClicked(this);
+	}
 }
