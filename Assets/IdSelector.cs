@@ -80,7 +80,7 @@ public class IdSelector : MonoBehaviour {
 
     private IEnumerator Translate_c(Transform targetTransform, Vector3 end)
     {
-        float duration = 0.5f;
+        float duration = 0.2f;
         float resolution = duration * 30f; //30 FPS
 
         float step = duration / resolution;
@@ -88,11 +88,11 @@ public class IdSelector : MonoBehaviour {
 
         for (int i = 1; i < resolution + 1; i++)
         {
-            float x = EasingEquations.EaseInOutBack(start.x, end.x, i / resolution);
-            float y = EasingEquations.EaseInOutBack(start.y, end.y, i / resolution);
+            float x = EasingEquations.EaseOutCubic(start.x, end.x, i / resolution);
+            float y = EasingEquations.EaseOutCubic(start.y, end.y, i / resolution);
             targetTransform.position = new Vector3(x, y, targetTransform.position.z);
 
-            float scale = EasingEquations.EaseInOutBack(0, 1, i / resolution);
+            float scale = EasingEquations.EaseOutCubic(0, 1, i / resolution);
             targetTransform.localScale = new Vector3(scale, scale, scale);
 
             yield return new WaitForSeconds(step);
