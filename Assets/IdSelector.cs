@@ -9,13 +9,15 @@ public class IdSelector : MonoBehaviour {
     private TrackingEmulator trackingEmulator;
     private int currentId = 0;
 
-    public float z = -2f;
+    // $!!!!!
+    public float selectorZ = -2f;
+    public float selectorMarkerZ = -3f;
 
 	// Use this for initialization
 	void Start () {
 
         // set z postition to separate IdSelector clicks from other clicks
-        transform.position = new Vector3(transform.position.x, transform.position.y, z);
+        transform.position = new Vector3(transform.position.x, transform.position.y, selectorZ);
 
         trackingEmulator = transform.parent.GetComponent<TrackingEmulator>();
 
@@ -37,7 +39,7 @@ public class IdSelector : MonoBehaviour {
             Close();
 
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = z;
+            mousePosition.z = selectorZ;
             Open(mousePosition);
 
             state = 1;
@@ -46,7 +48,7 @@ public class IdSelector : MonoBehaviour {
         if (state == 1)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = z;
+            mousePosition.z = selectorZ;
             int id = CheckCollisionWithMarkerSelector(mousePosition);
 
             // if mouse is colliding with an IdSelectorMarker
