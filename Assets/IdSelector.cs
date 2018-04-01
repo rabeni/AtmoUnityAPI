@@ -9,7 +9,6 @@ public class IdSelector : MonoBehaviour {
     private TrackingEmulator trackingEmulator;
     private int currentId = 0;
 
-    // $!!!!!
     public float selectorZ = -2f;
     public float selectorMarkerZ = -3f;
 
