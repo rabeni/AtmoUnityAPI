@@ -6,13 +6,11 @@ public class IdSelectorMarker : MonoBehaviour {
 
     public bool selected = false;
     public SpriteRenderer marker;
-	private IdSelector selector;
 
 	// Use this for initialization
 	void Start () 
 	{
         marker = GetComponent<SpriteRenderer>();
-		selector = GetComponentInParent<IdSelector> ();
 	}
 
     // hover
