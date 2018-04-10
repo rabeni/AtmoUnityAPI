@@ -15,7 +15,6 @@ public class EmulatedMarker : MonoBehaviour {
 	void Start () {
         diceFace = GetComponent<SpriteRenderer>();
 
-        // ezzel valami para van!!
         trackingEmulator = transform.parent.GetComponent<TrackingEmulator>();
 	}
 	
