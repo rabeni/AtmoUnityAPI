@@ -34,7 +34,6 @@ public class IdSelector : MonoBehaviour {
 
 	}
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -52,6 +51,7 @@ public class IdSelector : MonoBehaviour {
         if (state == 1)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
 			// with different z, there's no match
 			mousePosition.z = selectorMarkerZ;
             int id = CheckCollisionWithMarkerSelector(mousePosition);
@@ -79,8 +79,6 @@ public class IdSelector : MonoBehaviour {
         int numOfItems = 6;
         float radius = 0.6f;
 
-//        transform.position = center;
-
         for (int i = 0; i < numOfItems; i++)
         {
             float angle = i * Mathf.PI * 2 / numOfItems;
@@ -99,7 +97,6 @@ public class IdSelector : MonoBehaviour {
         float resolution = duration * 30f; //30 FPS
 
         float step = duration / resolution;
-//        Vector3 start = targetTransform.position;
 
         for (int i = 1; i < resolution + 1; i++)
         {

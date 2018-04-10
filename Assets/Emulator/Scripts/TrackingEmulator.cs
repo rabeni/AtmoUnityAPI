@@ -23,6 +23,7 @@ public class TrackingEmulator : MonoBehaviour {
 			Debug.LogError ("AtmoTracking gameObject is missing.");
 		}
 
+		// checks every second
 		StartCoroutine (RemoveOverdueHiddenMarkers ());
 	}
 
