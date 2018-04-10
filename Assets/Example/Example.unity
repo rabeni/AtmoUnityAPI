@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
-  marker: {fileID: 0}
+  marker: {fileID: 212561207161092926, guid: d6f21958ab29a4a15959939b6157193d, type: 2}
 --- !u!61 &306101980
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2038,7 +2038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
-  marker: {fileID: 0}
+  marker: {fileID: 212629567197708328, guid: 2574888dccd3f453ab0e57eb23262479, type: 2}
 --- !u!61 &1135575763
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2101,7 +2101,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a225da0134f44ad58d8185273ee1ba5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2608,7 +2608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
-  marker: {fileID: 0}
+  marker: {fileID: 212570553546908248, guid: e01caa72dcfce4c128a1ef7c32f00db6, type: 2}
 --- !u!61 &1337379491
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2726,7 +2726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
-  marker: {fileID: 0}
+  marker: {fileID: 212515724797669740, guid: 48109234be17d406d88107e96225c0b7, type: 2}
 --- !u!61 &1357928523
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3278,7 +3278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
-  marker: {fileID: 0}
+  marker: {fileID: 212003356487011952, guid: 76e9b6d7fe05c4b348276822cf6baa6d, type: 2}
 --- !u!61 &1498448058
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4928,7 +4928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
-  marker: {fileID: 0}
+  marker: {fileID: 212766281438232360, guid: a558deb40d9b64f27bad03f0c56bc7e5, type: 2}
 --- !u!61 &2050326195
 BoxCollider2D:
   m_ObjectHideFlags: 0
