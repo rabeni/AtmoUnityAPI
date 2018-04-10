@@ -8,7 +8,6 @@ public class IdSelector : MonoBehaviour {
     private bool open = false;
     private TrackingEmulator trackingEmulator;
     private int currentId = 0;
-	private Vector3 center;
 
 	private IdSelectorMarker current;
 	private IdSelectorMarker prev;
@@ -84,7 +83,6 @@ public class IdSelector : MonoBehaviour {
 
 		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mousePosition.z = selectorZ;
-		center = mousePosition;
 
         for (int i = 0; i < numOfItems; i++)
         {
