@@ -14,18 +14,21 @@ public class TrackingEmulator : MonoBehaviour {
 
     public int _markerId;
 
-	// Use this for initialization
-	void Start () {
-        trackingHandler = GameObject.Find("AtmoTracking").GetComponent<TrackingHandler>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	void Start () 
+	{
+		try 
+		{
+			trackingHandler = GameObject.Find("AtmoTracking").GetComponent<TrackingHandler>();
+		}
+		catch (System.Exception ex) 
+		{
+			Debug.LogError ("AtmoTracking gameObject is missing.");
+		}
 
-        RemoveOverdueHiddenMarkers();
+		StartCoroutine (RemoveOverdueHiddenMarkers ());
 	}
 
-    // Add new marker
+    // Add new marker on left click
 	private void OnMouseUp()
 	{
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -36,19 +39,19 @@ public class TrackingEmulator : MonoBehaviour {
 
     }
 
+	public void OnExistingClicked(EmulatedMarker clickedMarker)
+	{
+		if (clickedMarker.hidden)
+			UnhideMarker(clickedMarker);
+
+		else
+			HideMarker(clickedMarker);
+	}
+
 	private bool CheckCollisionWithEmulator(Vector3 mousePosition)
     {
         return transform.GetComponent<Collider2D>().bounds.Contains(mousePosition);
     }
-
-    public void OnExistingClicked(EmulatedMarker clickedMarker)
-	{
-        if (clickedMarker.hidden)
-            UnhideMarker(clickedMarker);
-
-        else
-            HideMarker(clickedMarker);
-	}
 
 	private EmulatedMarker CheckCollisionWithExistingMarker(Vector3 mousePosition)
     {
