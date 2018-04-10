@@ -20,7 +20,7 @@ public class TrackingEmulator : MonoBehaviour {
 		}
 		catch (System.Exception ex) 
 		{
-			Debug.LogError ("AtmoTracking gameObject is missing.");
+			Debug.LogError (ex.Message + ": AtmoTracking gameObject is missing from Scene or named differently.");
 		}
 
 		// checks every second
