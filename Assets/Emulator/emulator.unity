@@ -1078,7 +1078,7 @@ GameObject:
   - component: {fileID: 574506420}
   - component: {fileID: 574506422}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: uiShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1134,12 +1134,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 574506419}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.4625, y: -2.8824, z: -5}
   m_LocalScale: {x: 2.5185041, y: 1.8743732, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1026907733}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &574506422
 BoxCollider2D:
@@ -1568,6 +1568,10 @@ Prefab:
       propertyPath: MainCamera
       value: 
       objectReference: {fileID: 1699590664}
+    - target: {fileID: 1804535078910082, guid: 401fdc3993c21464383dcd3c9220456f, type: 2}
+      propertyPath: m_Name
+      value: AtmoTracking
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 401fdc3993c21464383dcd3c9220456f, type: 2}
   m_IsPrefabParent: 0
@@ -1698,7 +1702,7 @@ GameObject:
   - component: {fileID: 915949738}
   - component: {fileID: 915949740}
   m_Layer: 0
-  m_Name: New Sprite (1)
+  m_Name: uiShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1754,12 +1758,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 915949737}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.952, y: -2.347, z: -5}
   m_LocalScale: {x: 0.7063978, y: 2.3978708, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1026907733}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &915949740
 BoxCollider2D:
@@ -1976,6 +1980,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 574506421}
+  - {fileID: 915949739}
   - {fileID: 1116671093}
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -2253,7 +2259,7 @@ Transform:
   - {fileID: 1483783183}
   - {fileID: 411979988}
   m_Father: {fileID: 1026907733}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1116671094
 MonoBehaviour:
