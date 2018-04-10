@@ -7,11 +7,9 @@ public class TrackingEmulator : MonoBehaviour {
     private TrackingHandler trackingHandler;
     private List<EmulatedMarker> existingMarkers = new List<EmulatedMarker>();
     private List<EmulatedMarker> hiddenMarkers = new List<EmulatedMarker>();
+	private int uniqueId = 0;
 
     public GameObject[] markerSprites = new GameObject[6];
-
-    private int uniqueId = 0;
-
     public int _markerId;
 
 	void Start () 
