@@ -31,11 +31,7 @@ public class TrackingEmulator : MonoBehaviour {
 	private void OnMouseUp()
 	{
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // between the emulator collider and IdSelector
-        mousePosition.z = -1;
-
         AddNewMarker(mousePosition, _markerId);
-
     }
 
 	public void OnExistingClicked(EmulatedMarker clickedMarker)
@@ -71,6 +67,8 @@ public class TrackingEmulator : MonoBehaviour {
 
     private void AddNewMarker(Vector3 mousePosition, int markerId)
     {
+		// put new marker between the emulator collider and IdSelector
+		mousePosition.z = -1;
         EmulatedMarker newMarker = Instantiate(markerSprites[markerId], mousePosition, Quaternion.identity, transform).GetComponent<EmulatedMarker>();
         newMarker.marker = new Marker(0, _markerId, uniqueId++, mousePosition);
         existingMarkers.Add(newMarker);

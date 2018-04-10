@@ -5,9 +5,14 @@ using UnityEngine;
 public class IdSelector : MonoBehaviour {
 
     private IdSelectorMarker[] markers = new IdSelectorMarker[6];
-    private int state = 0;
+    private bool open = false;
     private TrackingEmulator trackingEmulator;
     private int currentId = 0;
+	private Vector3 center;
+
+	private IdSelectorMarker current;
+	private IdSelectorMarker prev;
+
 
     public float selectorZ = -2f;
     public float selectorMarkerZ = -3f;
@@ -36,37 +41,34 @@ public class IdSelector : MonoBehaviour {
 
     void Update()
     {
-
+		// right click to open selector
         if (Input.GetMouseButtonUp(1))
         {
-            Close();
-
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = selectorZ;
-            Open(mousePosition);
-
-            state = 1;
+            Open();
         }
-
-        if (state == 1)
+			
+		// left click on marker selector to select marker
+		if (open == true && Input.GetMouseButtonUp(0))
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-			// with different z, there's no match
-			mousePosition.z = selectorMarkerZ;
-            int id = CheckCollisionWithMarkerSelector(mousePosition);
+            int id = CheckCollisionWithMarkerSelector();
 
             // if mouse is colliding with an IdSelectorMarker
-            if (id != -1 && Input.GetMouseButtonUp(0))
+            if (id != -1)
             {
-                markers[currentId].Deselect();
-                markers[id].Select();
-                currentId = id;
-                trackingEmulator._markerId = id;
-                Close();
+				StartCoroutine(OnMarkerSelected (id));
             }
         }
     }
+
+	public IEnumerator OnMarkerSelected(int id)
+	{
+		markers[currentId].Deselect();
+		markers[id].Select();
+		currentId = id;
+		trackingEmulator._markerId = id;
+		yield return new WaitForSeconds (0.2f);
+		Close();
+	}
 
 	// if selector is open and there's a click, close it
 	void OnMouseUp() 
@@ -74,24 +76,29 @@ public class IdSelector : MonoBehaviour {
 		Close ();
 	}
 
-    private void Open(Vector3 center)
+    private void Open()
     {
         int numOfItems = 6;
         float radius = 0.6f;
+		open = true;
+
+		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		mousePosition.z = selectorZ;
+		center = mousePosition;
 
         for (int i = 0; i < numOfItems; i++)
         {
             float angle = i * Mathf.PI * 2 / numOfItems;
-			Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius + center;
+			Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius + mousePosition;
 
-			StartCoroutine(Translate_c(markers[i].transform, center, pos));
+			StartCoroutine(OpenAnim_c(markers[i].transform, mousePosition, pos, 0, 1));
         }
 
 		// enable selector layer collider
 		gameObject.GetComponent<BoxCollider2D> ().enabled = true;
     }
 
-	private IEnumerator Translate_c(Transform targetTransform, Vector3 start, Vector3 end)
+	private IEnumerator OpenAnim_c(Transform targetTransform, Vector3 start, Vector3 end, float startScale, float endScale)
     {
         float duration = 0.2f;
         float resolution = duration * 30f; //30 FPS
@@ -104,8 +111,8 @@ public class IdSelector : MonoBehaviour {
             float y = EasingEquations.EaseOutCubic(start.y, end.y, i / resolution);
 			targetTransform.position = new Vector3 (x, y, selectorMarkerZ);//targetTransform.position.z);
 
-            float scale = EasingEquations.EaseOutCubic(0, 1, i / resolution);
-            targetTransform.localScale = new Vector3(scale, scale, scale);
+			float scale = EasingEquations.EaseOutCubic(startScale, endScale, i / resolution);
+			targetTransform.localScale = new Vector3(scale, scale, scale);
 
             yield return new WaitForSeconds(step);
         }
@@ -113,19 +120,23 @@ public class IdSelector : MonoBehaviour {
 
     private void Close()
     {
-        for (int i = 0; i < 6; i++)
-        {
-			markers[i].transform.localPosition = new Vector3(0, 0, selectorMarkerZ);
+		open = false;
 
-            markers[i].transform.localScale = new Vector3(0, 0, 0);
-        }
+		for (int i = 0; i < 6; i++)
+		{
+			markers[i].transform.localPosition = new Vector3(0, 0, selectorMarkerZ);
+			markers[i].transform.localScale = new Vector3(0, 0, 0);
+		}
 
 		// disable selector layer collider
 		gameObject.GetComponent<BoxCollider2D> ().enabled = false;
     }
 
-    private int CheckCollisionWithMarkerSelector(Vector3 mousePosition)
+    private int CheckCollisionWithMarkerSelector()
     {
+		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		mousePosition.z = selectorMarkerZ;
+
         int index = -1;
 
         for (int i = 0; i < 6; i++)
