@@ -98,20 +98,19 @@ public class TrackingEmulator : MonoBehaviour {
         trackingHandler.onRedetectedEvent.Invoke(hiddenMarker.marker);
     }
 
-    private void RemoveOverdueHiddenMarkers()
-    {
-        if (hiddenMarkers.Count > 0)
-        {
-            for (int i = hiddenMarkers.Count - 1; i >= 0;i--)
-            {
-                if (Time.time - hiddenMarkers[i].hideTimeStamp >= 5)
-                {
-                    RemoveMarker(hiddenMarkers[i]);
-                    hiddenMarkers.Remove(hiddenMarkers[i]);
-                }
-            }
-        }
-    }
-
-
+	// check and remove hidden markers every sec
+	IEnumerator RemoveOverdueHiddenMarkers()
+	{
+		while (true) {
+			yield return new WaitForSeconds (1);
+			if (hiddenMarkers.Count > 0) {
+				for (int i = hiddenMarkers.Count - 1; i >= 0; i--) {
+					if (Time.time - hiddenMarkers [i].hideTimeStamp >= 5) {
+						RemoveMarker (hiddenMarkers [i]);
+						hiddenMarkers.Remove (hiddenMarkers [i]);
+					}
+				}
+			}
+		}
+	}
 }
