@@ -155,7 +155,7 @@ public class Serial : MonoBehaviour
 
     // Only one serial port shared among all instances and living after all instances have been destroyed
     private static SerialPort s_serial;
-    public SerialPort GetSerial{ get { return s_serial; }}
+    public SerialPort GetSerial { get { return s_serial; } }
 
     // 
     private static List<Serial> s_instances = new List<Serial>();
@@ -235,7 +235,7 @@ public class Serial : MonoBehaviour
 
                     case RuntimePlatform.WindowsEditor:
                     case RuntimePlatform.WindowsPlayer:
-                    //case RuntimePlatform.WindowsWebPlayer:
+                        //case RuntimePlatform.WindowsWebPlayer:
 
                         s_serial.ReadTimeout = 1;
 
@@ -455,7 +455,7 @@ public class Serial : MonoBehaviour
             else
             {
                 if (s_debug)
-                    print("Opening serial port: " + portName);
+                    Debug.Log("Opening serial port: " + portName);
             }
 
             s_serial = new SerialPort(portName, portSpeed);
@@ -559,22 +559,33 @@ public class Serial : MonoBehaviour
 
             case RuntimePlatform.OSXPlayer:
             case RuntimePlatform.OSXEditor:
-            //case RuntimePlatform.OSXDashboardPlayer:
-            case RuntimePlatform.LinuxPlayer:
+                //case RuntimePlatform.OSXDashboardPlayer:
 
                 portNames = System.IO.Ports.SerialPort.GetPortNames();
+                //portNames = System.IO.Directory.GetFiles("/dev/");
 
-                if (portNames.Length == 0)
-                {
-                    portNames = System.IO.Directory.GetFiles("/dev/");
-                }
+                //if (portNames.Length == 0)
+                //{
+                //    portNames = System.IO.Directory.GetFiles("/dev/");
+                //}
 
                 foreach (string portName in portNames)
                 {
-                    if (portName.StartsWith("/dev/tty.usb") || portName.StartsWith("/dev/ttyUSB") || portName.StartsWith("/dev/cu.wchusbserial1420"))
+                    print(portName);
+
+                    bool possibleMacPorts = portName.StartsWith("/dev/tty.usb", StringComparison.OrdinalIgnoreCase) ||
+                                           portName.StartsWith("/dev/ttyUSB", StringComparison.OrdinalIgnoreCase) ||
+                                           portName.StartsWith("/dev/cu.wchusbserial1420", StringComparison.OrdinalIgnoreCase);
+
+                    if (possibleMacPorts)
                         return portName;
                 }
                 return "";
+
+            case RuntimePlatform.LinuxPlayer:
+
+                Debug.Log("LinuxPLayer port setting.");
+                return "/dev/ttyACM0";
 
             default: // Windows
 
