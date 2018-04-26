@@ -562,12 +562,11 @@ public class Serial : MonoBehaviour
                 //case RuntimePlatform.OSXDashboardPlayer:
 
                 portNames = System.IO.Ports.SerialPort.GetPortNames();
-                //portNames = System.IO.Directory.GetFiles("/dev/");
 
-                //if (portNames.Length == 0)
-                //{
-                //    portNames = System.IO.Directory.GetFiles("/dev/");
-                //}
+                if (portNames.Length == 0)
+                {
+                    portNames = System.IO.Directory.GetFiles("/dev/");
+                }
 
                 foreach (string portName in portNames)
                 {
