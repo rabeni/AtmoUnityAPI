@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class Strip : MonoBehaviour
 {
+    public Strip instance;
     private Renderer[] _leds = new Renderer[144];
     [HideInInspector]
     public int _numLeds = 144;
@@ -17,10 +18,17 @@ public class Strip : MonoBehaviour
     [SerializeField]
     private GameObject _led;
 
+
     void Awake()
     {
-        Init();
-        SetAll(new Color32(0, 0, 0, 255));
+        //Check if instance already exists. 
+        if (instance == null)
+        {
+            instance = this;
+
+            Init();
+            SetAll(new Color32(0, 0, 0, 255));
+        }
     }
 
     #region Public Methods
@@ -203,7 +211,7 @@ public class Strip : MonoBehaviour
     // Instantiates leds on the scene
     private void Init()
     {
-        int radius = 10;
+        int radius = 20;
         float rotateToTable = 149 * Mathf.Deg2Rad;
         int NumOfMissingLeds = 13;
         for (int i = 0; i < _numLeds; i++)
@@ -226,7 +234,7 @@ public class Strip : MonoBehaviour
     }
 
     // Maps byte between 0-244. 255 is kept for header.
-    private byte MapByte(byte b) 
+    private byte MapByte(byte b)
     {
         if (b > 244)
             b = 244;

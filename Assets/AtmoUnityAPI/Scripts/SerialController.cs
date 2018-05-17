@@ -11,20 +11,36 @@ using UnityEngine;
 using System.Threading;
 using System.Linq;
 
-public class SerialController : MonoBehaviour {
+public class SerialController : MonoBehaviour
+{
+
+    private static SerialController instance;
 
     private Thread thread;
-    private Queue outputQueue; 
+    private Queue outputQueue;
 
-    private const float periodSec = 0.02f;
+    private const float periodSec = 1f / 30f;
     private byte[] buffer;
     private Strip strip;
 
     void Start()
     {
-        strip = GetComponent<Strip>();
+        // needs to be singleton otherwise it starts a new thread on every new scene
+        if (instance == null)
+        {
+            instance = this;
 
-        StartThread();
+            strip = GetComponent<Strip>();
+            StartThread();
+        }
+        else if (instance != this)
+        {
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+        }
+
+        //Sets this to not be destroyed when reloading scene
+        DontDestroyOnLoad(gameObject);
     }
 
     private void StartThread()
@@ -40,8 +56,10 @@ public class SerialController : MonoBehaviour {
 
     private void ThreadLoop()
     {
+        int ms = (int)(periodSec * 1000);
         while (true)
         {
+            Thread.Sleep(ms);
             if (outputQueue.Count != 0)
             {
                 Serial.Write((byte[])outputQueue.Dequeue());
