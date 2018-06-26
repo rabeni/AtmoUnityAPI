@@ -5,7 +5,7 @@ AtmoUnityAPI interfaces Atmo with Unity. [AtmoTracking](/README.md#atmotracking)
 ## Getting started
 
 1. Download the repository. 
-2. Download the [Atmo](https://drive.google.com/open?id=1hCropZ12itlpUQ8lhq1flumJUgpD3bh8) application.
+2. Download the [Atmo](https://drive.google.com/open?id=1Ueg5jmzLmQ4GOi0b1g9LFR781VM9SVvF) application.
 3. Create a new Unity project.
 4. Add a new resolution on the Game view with fixed resolution of 1280x800.
 
