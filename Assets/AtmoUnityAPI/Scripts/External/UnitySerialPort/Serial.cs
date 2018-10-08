@@ -55,7 +55,7 @@ using System;
 // cf. http://msdn.microsoft.com/en-us/library/system.io.ports.serialport(v=vs.110).aspx
 
 
-public class Serial : MonoBehaviour
+public partial class Serial : MonoBehaviour
 {
 
     private const int BAUD = 2000000;
@@ -559,8 +559,6 @@ public class Serial : MonoBehaviour
 
             case RuntimePlatform.OSXPlayer:
             case RuntimePlatform.OSXEditor:
-            //case RuntimePlatform.OSXDashboardPlayer:
-            case RuntimePlatform.LinuxPlayer:
 
                 portNames = System.IO.Ports.SerialPort.GetPortNames();
 
@@ -571,7 +569,21 @@ public class Serial : MonoBehaviour
 
                 foreach (string portName in portNames)
                 {
-                    if (portName.StartsWith("/dev/tty.usb") || portName.StartsWith("/dev/ttyUSB") || portName.StartsWith("/dev/cu.wchusbserial1420"))
+                    if (portName.StartsWith("/dev/tty.usb") || 
+                        portName.StartsWith("/dev/ttyUSB") || 
+                        portName.StartsWith("/dev/cu.wchusbserial1420"))
+                        return portName;
+                }
+                return "";
+            
+            case RuntimePlatform.LinuxPlayer:
+            case RuntimePlatform.LinuxEditor:
+
+                portNames = System.IO.Directory.GetFiles("/dev/");
+
+                foreach (string portName in portNames)
+                {
+                    if (portName.StartsWith("/dev/ttyACM"))
                         return portName;
                 }
                 return "";
