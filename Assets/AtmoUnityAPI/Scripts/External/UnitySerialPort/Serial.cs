@@ -559,7 +559,6 @@ public class Serial : MonoBehaviour
 
             case RuntimePlatform.OSXPlayer:
             case RuntimePlatform.OSXEditor:
-                //case RuntimePlatform.OSXDashboardPlayer:
 
                 portNames = System.IO.Ports.SerialPort.GetPortNames();
 
@@ -570,21 +569,24 @@ public class Serial : MonoBehaviour
 
                 foreach (string portName in portNames)
                 {
-                    print(portName);
-
-                    bool possibleMacPorts = portName.StartsWith("/dev/tty.usb", StringComparison.OrdinalIgnoreCase) ||
-                                           portName.StartsWith("/dev/ttyUSB", StringComparison.OrdinalIgnoreCase) ||
-                                           portName.StartsWith("/dev/cu.wchusbserial1420", StringComparison.OrdinalIgnoreCase);
-
-                    if (possibleMacPorts)
+                    if (portName.StartsWith("/dev/tty.usb") || 
+                        portName.StartsWith("/dev/ttyUSB") || 
+                        portName.StartsWith("/dev/cu.wchusbserial1420"))
                         return portName;
                 }
                 return "";
-
+            
             case RuntimePlatform.LinuxPlayer:
+            case RuntimePlatform.LinuxEditor:
 
-                Debug.Log("LinuxPLayer port setting.");
-                return "/dev/ttyACM0";
+                portNames = System.IO.Directory.GetFiles("/dev/");
+
+                foreach (string portName in portNames)
+                {
+                    if (portName.StartsWith("/dev/ttyACM"))
+                        return portName;
+                }
+                return "";
 
             default: // Windows
 
