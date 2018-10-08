@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * Version 0.3.3, 2016-03-17, Pierre Rossel
  * 
  * This behavior helps sending and receiving data from a serial port. 
@@ -559,8 +559,6 @@ public class Serial : MonoBehaviour
 
             case RuntimePlatform.OSXPlayer:
             case RuntimePlatform.OSXEditor:
-            //case RuntimePlatform.OSXDashboardPlayer:
-            case RuntimePlatform.LinuxPlayer:
 
                 portNames = System.IO.Ports.SerialPort.GetPortNames();
 
@@ -571,7 +569,21 @@ public class Serial : MonoBehaviour
 
                 foreach (string portName in portNames)
                 {
-                    if (portName.StartsWith("/dev/tty.usb") || portName.StartsWith("/dev/ttyUSB") || portName.StartsWith("/dev/cu.wchusbserial1420"))
+                    if (portName.StartsWith("/dev/tty.usb") || 
+                        portName.StartsWith("/dev/ttyUSB") || 
+                        portName.StartsWith("/dev/cu.wchusbserial1420"))
+                        return portName;
+                }
+                return "";
+            
+            case RuntimePlatform.LinuxPlayer:
+            case RuntimePlatform.LinuxEditor:
+
+                portNames = System.IO.Directory.GetFiles("/dev/");
+
+                foreach (string portName in portNames)
+                {
+                    if (portName.StartsWith("/dev/ttyACM"))
                         return portName;
                 }
                 return "";
