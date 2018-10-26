@@ -1,4 +1,4 @@
-﻿/*
+/*
   SerialController.cs - This script handles the serial communication 
   between Unity and Atmo lights. It periodically fills the outputQueue with
   led color data that is periodically sent in a separate thread via a serial 
@@ -10,6 +10,7 @@ using System.Collections;
 using UnityEngine;
 using System.Threading;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 
 public class SerialController : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class SerialController : MonoBehaviour
             Thread.Sleep(ms);
             if (outputQueue.Count != 0)
             {
-                Serial.Write((byte[])outputQueue.Dequeue());
+                AtmoSerial.Write((byte[])outputQueue.Dequeue());
             }
         }
     }
