@@ -47,6 +47,7 @@ using System.Collections.Generic;
 
 using System.IO.Ports;
 using System;
+using System.Runtime.CompilerServices;
 
 // System.IO.Ports requires a working Serial Port. On Mac, you will need to purcase the Uniduino plug-in on the Unity Store
 // This adds a folder + a file into your local folder at ~/lib/libMonoPosixHelper.dylib
@@ -154,14 +155,14 @@ public class Serial : MonoBehaviour
     #region Static vars
 
     // Only one serial port shared among all instances and living after all instances have been destroyed
-    private static SerialPort s_serial;
+    protected static SerialPort s_serial;
     public SerialPort GetSerial{ get { return s_serial; }}
 
     // 
-    private static List<Serial> s_instances = new List<Serial>();
+    protected static List<Serial> s_instances = new List<Serial>();
 
     // Enable debug info
-    private static bool s_debug = false; // Do not change here. Use EnableDebugInfo on any script instance
+    protected static bool s_debug = false; // Do not change here. Use EnableDebugInfo on any script instance
 
     private static float s_lastDataIn = 0;
     private static float s_lastDataCheck = 0;
@@ -390,7 +391,7 @@ public class Serial : MonoBehaviour
     /// </summary>
     public static void Write(string message)
     {
-        if (checkOpen())
+        if (s_instances[0].checkOpen())
             s_serial.Write(message);
     }
 
@@ -399,7 +400,7 @@ public class Serial : MonoBehaviour
     /// </summary>
     public static void Write(byte[] message)
     {
-        if (checkOpen())
+        if (s_instances[0].checkOpen())
             s_serial.Write(message, 0, message.Length);
     }
 
@@ -438,13 +439,13 @@ public class Serial : MonoBehaviour
     /// </summary>
     /// <returns><c>true</c>, if port is opened, <c>false</c> otherwise.</returns>
     /// <param name="portSpeed">Port speed.</param>
-    public static bool checkOpen(int portSpeed = BAUD)
+    protected virtual bool checkOpen(int portSpeed = BAUD)
     {
 
         if (s_serial == null)
         {
 
-            string portName = GetPortName();
+            string portName = s_instances[0].GetPortName();
 
             if (portName == "")
             {
@@ -549,7 +550,7 @@ public class Serial : MonoBehaviour
         }
     }
 
-    static string GetPortName()
+    protected virtual string GetPortName()
     {
 
         string[] portNames;
