@@ -1,4 +1,4 @@
-/*
+﻿/*
   SerialController.cs - This script handles the serial communication 
   between Unity and Atmo lights. It periodically fills the outputQueue with
   led color data that is periodically sent in a separate thread via a serial 
@@ -23,6 +23,7 @@ public class SerialController : MonoBehaviour
     private const float periodSec = 1f / 30f;
     private byte[] buffer;
     private Strip strip;
+    private bool on = true;
 
     void Start()
     {
@@ -58,7 +59,7 @@ public class SerialController : MonoBehaviour
     private void ThreadLoop()
     {
         int ms = (int)(periodSec * 1000);
-        while (true)
+        while (on)
         {
             Thread.Sleep(ms);
             if (outputQueue.Count != 0)
@@ -73,7 +74,7 @@ public class SerialController : MonoBehaviour
         //delaying the start of serial communication
         yield return new WaitForSeconds(0.1f);
 
-        while (true)
+        while (on)
         {
             outputQueue.Enqueue(ProcessBytesForSending());
             yield return new WaitForSeconds(periodSec);
@@ -86,5 +87,11 @@ public class SerialController : MonoBehaviour
         byte[] header = new byte[] { 0xff };
         buffer = header.Concat(strip.GetColorBytes()).ToArray();
         return buffer;
+    }
+
+    // stop loops when app quits
+    private void OnApplicationQuit()
+    {
+        on = false;
     }
 }
