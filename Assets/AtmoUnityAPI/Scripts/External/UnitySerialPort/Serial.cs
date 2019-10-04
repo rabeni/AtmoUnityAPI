@@ -155,7 +155,7 @@ public class Serial : MonoBehaviour
 
     // Only one serial port shared among all instances and living after all instances have been destroyed
     private static SerialPort s_serial;
-    public SerialPort GetSerial{ get { return s_serial; }}
+    public SerialPort GetSerial { get { return s_serial; } }
 
     // 
     private static List<Serial> s_instances = new List<Serial>();
@@ -235,7 +235,7 @@ public class Serial : MonoBehaviour
 
                     case RuntimePlatform.WindowsEditor:
                     case RuntimePlatform.WindowsPlayer:
-                    //case RuntimePlatform.WindowsWebPlayer:
+                        //case RuntimePlatform.WindowsWebPlayer:
 
                         s_serial.ReadTimeout = 1;
 
@@ -455,7 +455,7 @@ public class Serial : MonoBehaviour
             else
             {
                 if (s_debug)
-                    print("Opening serial port: " + portName);
+                    Debug.Log("Opening serial port: " + portName);
             }
 
             s_serial = new SerialPort(portName, portSpeed);
