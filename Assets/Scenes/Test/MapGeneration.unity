@@ -144,6 +144,7 @@ MonoBehaviour:
   _hexPrefab: {fileID: 8426647778885596094, guid: 9f1085448243bef4cbc3e47f3f8d328e,
     type: 3}
   _depth: 0
+  _spaceing: {x: 1.1, y: 1.1}
 --- !u!4 &154015085
 Transform:
   m_ObjectHideFlags: 0
