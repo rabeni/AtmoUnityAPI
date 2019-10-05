@@ -127,7 +127,9 @@ public class OSCHandler : MonoBehaviour
 	/// </summary>
 	void OnApplicationQuit() 
 	{
-		foreach(KeyValuePair<string,ClientLog> pair in _clients)
+        Debug.Log("Quit");
+
+        foreach (KeyValuePair<string,ClientLog> pair in _clients)
 		{
 			pair.Value.client.Close();
 		}
@@ -139,8 +141,24 @@ public class OSCHandler : MonoBehaviour
 			
 		_instance = null;
 	}
-	
-	/// <summary>
+
+    private void OnDestroy()
+    {
+        Debug.Log("Destroy");
+        foreach (KeyValuePair<string, ClientLog> pair in _clients)
+        {
+            pair.Value.client.Close();
+        }
+
+        foreach (KeyValuePair<string, ServerLog> pair in _servers)
+        {
+            pair.Value.server.Close();
+        }
+
+        _instance = null;
+    }
+
+    /// <summary>
 	/// Creates an OSC Client (sends OSC messages) given an outgoing port and address.
 	/// </summary>
 	/// <param name="clientId">

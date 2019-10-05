@@ -23,6 +23,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEngine;
 
 namespace UnityOSC
 {
@@ -121,7 +123,8 @@ namespace UnityOSC
 				_receiverThread.Start();
 			}
 			catch(Exception e)
-			{
+            {
+                UnityEngine.Debug.LogError(e.Message);
 				throw e;
 			}
 		}
@@ -169,14 +172,14 @@ namespace UnityOSC
 		/// </summary>
 		private void ReceivePool()
 		{
-			while( true )
-			{
-				Receive();
-				
-				Thread.Sleep(_sleepMilliseconds);
-			}
-		}
-		#endregion
+            while (true)
+            {
+                Receive();
+
+                Thread.Sleep(_sleepMilliseconds);
+            }
+        }
+#endregion
 	}
 }
 
